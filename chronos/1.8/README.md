@@ -1,7 +1,5 @@
 # How to use Chronos on DC/OS
 
-Note: DC/OS now includes a built-in [job scheduler](https://dcos.io/docs/1.8/usage/jobs/), which is the preferable way to schedule batch jobs.
-
 [Chronos](http://mesos.github.io/chronos/) is still available on DC/OS, representing the original way to run batch jobs. It is a highly-available, distributed job scheduler, providing the a robust way to run batch jobs. Chronos schedules jobs across the DC/OS cluster and manages dependencies between jobs in an intelligent way.
 
 
@@ -21,8 +19,8 @@ Note: DC/OS now includes a built-in [job scheduler](https://dcos.io/docs/1.8/usa
 
 ## Prerequisites
 
-- A running DC/OS 1.8 cluster with 1 nodes with at least 2GB of RAM and 1 CPU available in the cluster.
-- [DC/OS CLI](https://dcos.io/docs/1.8/usage/cli/install/) installed.
+- A running DC/OS 1.8 cluster with 1 nodes with at least 2.5GB of RAM and 2 CPU available in the cluster.
+- [DC/OS CLI](https://dcos.io/docs/1.9/usage/cli/install/) installed.
 
 ## Install Chronos
 
@@ -30,16 +28,16 @@ From the command line, enter this command:
 
 ```bash
 $ dcos package install chronos
-We recommend a minimum of one node with at least 1 CPU and 2GB of RAM available for the Chronos Service.
+This DC/OS Service is currently in preview. We recommend a minimum of one node with at least 2 CPUs and 2.5GiB of RAM available for the Chronos Service.
 Continue installing? [yes/no] yes
-Installing Marathon app for package [chronos] version [2.4.0]
+Installing Marathon app for package [chronos] version [3.0.1]
 Chronos DCOS Service has been successfully installed!
 
 	Documentation: http://mesos.github.io/chronos
 	Issues: https://github.com/mesos/chronos/issues
 ```
 
-Note that you can specify a JSON configuration file along with the Chronos installation command to customize the setup, like so: `dcos package install chronos --options=<config_file>`. For more information, see the DC/OS CLI [command reference](https://dcos.io/docs/1.8/usage/cli/command-reference/).
+Note that you can specify a JSON configuration file along with the Chronos installation command to customize the setup, like so: `dcos package install chronos --options=<config_file>`. For more information, see the DC/OS CLI [command reference](https://dcos.io/docs/1.9/usage/cli/command-reference/).
 
 Next, validate that Chronos is successfully installed. Go to the `Services` tab of the DC/OS UI and check if Chronos shows up in the list as `Healthy`:
 
@@ -48,10 +46,12 @@ Next, validate that Chronos is successfully installed. Go to the `Services` tab 
 In addition, run this command to view installed services:
 
 ```bash
-$ dcos package list
-NAME        VERSION  APP       COMMAND     DESCRIPTION
-chronos     2.4.0    /chronos  ---         A fault tolerant job scheduler for Mesos which handles dependencies and ISO8601 based schedules.
+$dcos package list
+NAME     VERSION  APP       COMMAND  DESCRIPTION
+chronos  3.0.1    /chronos  ---      A fault tolerant job scheduler for Mesos which handles dependencies and ISO8601 based schedules.
 ```
+
+//TO UPDATE//
 
 ## Create a scheduled job
 
@@ -101,6 +101,7 @@ You can also see the status of the job you entered in the Chronos UI:
 
 ![List of jobs in Chronos](img/status.png)
 
+//TO UPDATE - END
 ## Uninstall Chronos
 
 To uninstall Chronos enter the following command:
@@ -109,4 +110,4 @@ To uninstall Chronos enter the following command:
 $ dcos package uninstall chronos
 ```
 
-Finally, to get rid of all traces of Chronos in ZooKeeper, follow the steps outlined in the [framework cleaner](https://docs.mesosphere.com/1.8/usage/managing-services/uninstall/#framework-cleaner).
+Finally, to get rid of all traces of Chronos in ZooKeeper, follow the steps outlined in the [framework cleaner](https://docs.mesosphere.com/1.9/usage/managing-services/uninstall/#framework-cleaner).
